@@ -23,7 +23,7 @@
         }
 
         [HttpGet("Api/Products")]
-        public IActionResult List([FromQuery]int page = 0, [FromQuery]int size = 10)
+        public IActionResult List([FromQuery]int page = 0, [FromQuery]int size = 100)
         {
             var count = repository
                             .Query<Entity.Product>()
