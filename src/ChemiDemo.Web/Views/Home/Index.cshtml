@@ -1,4 +1,9 @@
 ﻿@page
-@model IndexModel
+@{
+}
 
-<div>The current time is @Model.CurrentTime.ToShortTimeString()</div>
+<h1>Available products:</h1>
+
+<p>
+    @MyApp.Namespace.IndexModel.saySome()
+</p>
