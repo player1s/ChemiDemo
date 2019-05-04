@@ -10,7 +10,7 @@
 
         for (int i = 0; i < products.Count; i++)
         {
-            <text> <a href="http://localhost:64888/Api/Product/@i">@products[i].Name </a><br/></text>
+            <text> <a href="@products[i].Uri">@products[i].Name </a><br/></text>
         }
 
     }
