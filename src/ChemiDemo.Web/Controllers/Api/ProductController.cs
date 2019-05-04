@@ -66,6 +66,31 @@
             return Ok(mapper.Map<Product.Edit>(item));
         }
 
+        [HttpGet("Api/Productdl/{id:int}")]
+        public IActionResult Getdl(int id)
+        {
+            var item = GetProduct(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            string wholeListInJson = MyApp.Namespace.IndexModel.Get("http://localhost:64888/Api/Products");
+            List<ChemiDemo.Web.Models.Product.Row> products = ChemiDemo.Web.Utility.JsonHandler.deSerializeProductsToList(wholeListInJson);
+            Product.Row product = null;
+
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (products[i].Id == id)
+                    product = products[i];
+            }
+
+            Downloader.Download(product.Uri, product.Name);
+
+            return Ok(mapper.Map<Product.Edit>(item));
+        }
+
         [HttpPut("Api/Product/{id:int}")]
         public IActionResult Save(int id, [FromBody]Product.Edit model)
         {
