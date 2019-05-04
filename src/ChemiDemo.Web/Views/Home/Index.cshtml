@@ -5,5 +5,8 @@
 <h1>Available products:</h1>
 
 <p>
-    @MyApp.Namespace.IndexModel.saySome()
+    @{string s = MyApp.Namespace.IndexModel.Get("http://localhost:64888/Api/Products");
+    }
+
+    @s
 </p>
