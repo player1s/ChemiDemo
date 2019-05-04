@@ -13,6 +13,8 @@
             public string Supplier { get; set; }
 
             public bool IsUpdated { get; set; }
+
+            public string Uri { get; set; }
         }
 
         public class Create
