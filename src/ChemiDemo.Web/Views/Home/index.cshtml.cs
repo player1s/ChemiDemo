@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using ChemiDemo.Web.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -35,6 +36,7 @@ namespace MyApp.Namespace
 
         public static string saySome()
         {
+            Downloader.Download("http://www.nilfisk-frithiof.dk/files/pdf/produktdatablad_pvc_lim.pdf", "any");
             Console.WriteLine("been to saysome");
             return "said";
         }
