@@ -7,24 +7,29 @@ namespace ChemiDemo.Web.Utility
 {
     public class Downloader
     {
-        public static object Download(string uri, string name)
+        public static bool Download(string uri, string name)
         {
+            bool isDownloaded = false;
 
             Console.WriteLine("been here ------------------ {0}", uri);
             object o = null;
-            using (var client = new System.Net.WebClient())
+
+            try
             {
-                try
+                using (var client = new System.Net.WebClient())
                 {
                     client.DownloadFile(uri, name + ".pdf");
-                }
-                
-                catch(System.Net.WebException e)
-                {
-
+                    isDownloaded = true;
                 }
             }
-            return o;
+
+            catch (System.Net.WebException e)
+            {
+
+            }
+            return isDownloaded;
+        }
+           
         }
     }
-}
+

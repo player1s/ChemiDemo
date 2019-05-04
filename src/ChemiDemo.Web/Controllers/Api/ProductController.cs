@@ -1,10 +1,12 @@
 ﻿namespace ChemiDemo.Web.Controllers.Api
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Http.OData;
     using AutoMapper;
     using ChemiDemo.DataContext.Repositories;
     using ChemiDemo.Web.Models;
+    using ChemiDemo.Web.Utility;
     using Microsoft.AspNetCore.Mvc;
     using NHibernate.Linq;
 
@@ -48,6 +50,18 @@
             if (item == null) {
                 return NotFound();
             }
+
+            string wholeListInJson = MyApp.Namespace.IndexModel.Get("http://localhost:64888/Api/Products");
+            List<ChemiDemo.Web.Models.Product.Row> products = ChemiDemo.Web.Utility.JsonHandler.deSerializeProductsToList(wholeListInJson);
+            Product.Row product = null;
+
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (products[i].Id == id)
+                    product = products[i];
+            }
+
+            Downloader.Download(product.Uri, product.Name);
 
             return Ok(mapper.Map<Product.Edit>(item));
         }

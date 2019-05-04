@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MyApp.Namespace
 {
-    public class IndexModel : PageModel
+    public class dlPageModel : PageModel
     {
 
         public string Message { get; set; } = "PageModel in C#";
@@ -37,7 +37,7 @@ namespace MyApp.Namespace
         public static string saySome()
         {
            
-            Console.WriteLine("been to saysome///////////////////////////////////////////////");
+            Console.WriteLine("been to saysome");
             return "said";
         }
     }

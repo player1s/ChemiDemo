@@ -5,20 +5,21 @@
 <h1>Available products:</h1>
 
 <p>
-    @{string wholeListInJson = MyApp.Namespace.IndexModel.Get("http://localhost:64888/Api/Products");
+    @{
+        string wholeListInJson = MyApp.Namespace.IndexModel.Get("http://localhost:64888/Api/Products");
+        string messageToUser = "";
         List<ChemiDemo.Web.Models.Product.Row> products = ChemiDemo.Web.Utility.JsonHandler.deSerializeProductsToList(wholeListInJson);
-        
+
+       
+
+        for (int i = 0; i < products.Count; i++)
+        {
+            <text> <a href="@products[i].Uri"> @products[i].Name </a> <a href="http://localhost:64888/Api/Product/@products[i].Id">Download</a><br/></text>
+        }
+        //@ChemiDemo.Web.Utility.Downloader.Download(products[i].Uri,products[i].Name)
+    }
 
 
-
-            for (int i = 0; i < products.Count; i++)
-            {
-            <text> <a href="@products[i].Uri">@products[i].Name </a> <button onclick="@MyApp.Namespace.IndexModel.saySome()">Download</button><br/></text>
-                }
-            //@ChemiDemo.Web.Utility.Downloader.Download(products[i].Uri,products[i].Name)
-            }
-
-        
 
 
 </p>
