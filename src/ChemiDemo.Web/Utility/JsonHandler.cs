@@ -9,11 +9,15 @@ namespace ChemiDemo.Web.Utility
 {
     public class JsonHandler
     {
-        public List<Product> deSerializeProductsToList(String json)
+        public static List<Product.Row> deSerializeProductsToList(String json)
         {
-            List<Product> products = new List<Product>();
+            Console.WriteLine("deserializer got this json ---------------------------- {0}", json);
 
-            products = (List<Product>) JsonConvert.DeserializeObject<List<Product>>(json);
+            List<Product.Row> products = new List<Product.Row>();
+
+            products = (List<Product.Row>) JsonConvert.DeserializeObject<List<Product.Row>>(json);
+
+            Console.WriteLine("deserializer firstelement name ---------------------------- {0}", products[0].Name);
 
             return products;
         }

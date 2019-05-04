@@ -35,7 +35,9 @@
                             .Take(size)
                             .ToFuture();
 
-            return Ok(new PageResult<Product.Row>(result.Select(x => mapper.Map<Product.Row>(x)), null, count.Value));
+            //new PageResult<Product.Row> ... , null, count.Value ----- removed these parts to fit the json format
+
+            return Ok((result.Select(x => mapper.Map<Product.Row>(x))));
         }
 
         [HttpGet("Api/Product/{id:int}")]
