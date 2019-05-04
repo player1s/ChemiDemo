@@ -67,14 +67,11 @@
         }
 
         [HttpGet("Api/Productdl/{id:int}")]
-        public IActionResult Getdl(int id)
+        public void Getdl(int id)
         {
             var item = GetProduct(id);
 
-            if (item == null)
-            {
-                return NotFound();
-            }
+            
 
             string wholeListInJson = MyApp.Namespace.IndexModel.Get("http://localhost:64888/Api/Products");
             List<ChemiDemo.Web.Models.Product.Row> products = ChemiDemo.Web.Utility.JsonHandler.deSerializeProductsToList(wholeListInJson);
@@ -86,9 +83,9 @@
                     product = products[i];
             }
 
-            Downloader.Download(product.Uri, product.Name);
+             Downloader.Download(product.Uri, product.Name);
 
-            return Ok(mapper.Map<Product.Edit>(item));
+            
         }
 
         [HttpPut("Api/Product/{id:int}")]
@@ -132,6 +129,21 @@
             var item = GetProduct(id);
 
             if (item == null) {
+                return NotFound();
+            }
+
+            repository.Delete(item);
+
+            return Ok(id);
+        }
+
+        [HttpGet("Api/ProductDelete/{id:int}")]
+        public IActionResult Deleteproduct(int id)
+        {
+            var item = GetProduct(id);
+
+            if (item == null)
+            {
                 return NotFound();
             }
 
